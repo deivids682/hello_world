@@ -10,3 +10,12 @@ body {
   margin: 0 auto;
   text-align: left;
 }
+
+.done {
+  color: red;
+  text-decoration: line-through;
+}
+
+.undone {
+  color: #61dafb;
+}
