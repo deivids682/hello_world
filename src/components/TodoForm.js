@@ -3,7 +3,7 @@ import React from "react";
 export default class TodoForm extends React.Component {
   render() {
     return (
-      <div className="form-inline">
+      <form className="form-inline">
         <input
           onChange={this.props.onChange}
           type="text"
@@ -20,7 +20,7 @@ export default class TodoForm extends React.Component {
         >
           ADD
         </button>
-      </div>
+      </form>
     );
   }
 }

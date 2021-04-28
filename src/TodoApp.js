@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
+import { Layout } from "./components/Layout";
+import ListItem from "./components/ListItem";
 import TodoForm from "./components/TodoForm";
-import { TodoHeaders } from "./components/TodoHeaders";
 
 import TodoList from "./components/TodoList";
 
@@ -25,7 +26,8 @@ class TodoApp extends React.Component {
     });
   };
 
-  addTodoToList = () => {
+  addTodoToList = (event) => {
+    event.preventDefault();
     this.setState({
       ...this.state,
       todoName: "",
@@ -60,19 +62,25 @@ class TodoApp extends React.Component {
 
   render() {
     return (
-      <div id="main">
-        <TodoHeaders fullName={"Davis Iljins"} />
-        <TodoList
-          todoList={this.state.todoList}
-          deleteTodoItem={this.deleteTodoItem}
-          changeToDone={this.changeToDone}
-        />
+      <Layout>
+        <TodoList>
+          {this.state?.todoList.map((todoItem, index) => {
+            return (
+              <ListItem
+                key={index}
+                todoItem={todoItem}
+                deleteTodoItem={this.deleteTodoItem}
+                changeToDone={this.changeToDone}
+              />
+            );
+          })}
+        </TodoList>
         <TodoForm
           onChange={this.onChange}
           addTodoToList={this.addTodoToList}
           todoName={this.state.todoName}
         />
-      </div>
+      </Layout>
     );
   }
 }
