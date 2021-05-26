@@ -4,6 +4,7 @@ import TodoForm from "./components/TodoForm";
 import { TodoHeaders } from "./components/TodoHeaders";
 
 import TodoList from "./components/TodoList";
+import fetchWrapper from "./fetchWrapper";
 
 class TodoApp extends React.Component {
   state = {
@@ -12,6 +13,12 @@ class TodoApp extends React.Component {
   };
 
   componentDidMount() {
+    fetchWrapper.post("http://localhost:3000/todoList", {
+      name: "Davis Iljins",
+      todo: "Go to training",
+      isDone: false,
+    });
+
     this.onChange = this.onChange.bind(this);
     this.addTodoToList = this.addTodoToList.bind(this);
     this.deleteTodoItem = this.deleteTodoItem.bind(this);
