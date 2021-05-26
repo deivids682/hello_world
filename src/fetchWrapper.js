@@ -7,13 +7,14 @@ const methods = {
 
 async function fetchCore(url, method = "GET", body = {}) {
   return new Promise((resolve, reject) => {
-    fetch(url, {
+    const param = {
       method,
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
-    })
+    };
+    fetch(url, method != methods.GET ? param : null)
       .then((response) => {
         {
           if (response.status < 400) {

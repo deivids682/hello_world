@@ -1,23 +1,14 @@
 import React from "react";
 import ListItem from "./ListItem";
 
-class TodoList extends React.Component {
-  render() {
-    return (
-      <ul className="list-group">
-        {this.props?.todoList.map((todoItem, index) => {
-          return (
-            <ListItem
-              key={index}
-              todoItem={todoItem}
-              deleteTodoItem={this.props.deleteTodoItem}
-              changeToDone={this.props.changeToDone}
-            />
-          );
-        })}
-      </ul>
-    );
-  }
+function TodoList(props) {
+  return (
+    <ul className="list-group">
+      {props?.todoList.map((todoItem, index) => {
+        return <ListItem key={index} todoItem={todoItem} />;
+      })}
+    </ul>
+  );
 }
 
 export default TodoList;

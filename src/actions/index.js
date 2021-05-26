@@ -1,16 +1,6 @@
 import fetchWrapper from "../fetchWrapper";
 import { actionsTypes, URL } from "./constants";
 
-//fetchWrapper.get("http://localhost:3000/todoList");
-
-/*fetchWrapper.put("http://localhost:3000/todoList/2", {
-      name: "Davis Iljins",
-      todo: "Go to training",
-      isDone: true,
-    });*/
-
-// fetchWrapper.fetchDelete("http://localhost:3000/todoList/2");
-
 export const addTodoToList = (todoName) => async (dispatch) => {
   const response = await fetchWrapper.post(`${URL}/todoList`, {
     todoName,
@@ -19,6 +9,33 @@ export const addTodoToList = (todoName) => async (dispatch) => {
 
   dispatch({
     type: actionsTypes.ADD_TODO,
+    payload: response,
+  });
+};
+
+export const fetchTodoList = () => async (dispatch) => {
+  const response = await fetchWrapper.get(`${URL}/todoList`);
+
+  dispatch({
+    type: actionsTypes.FETCH_TODO_LIST,
+    payload: response,
+  });
+};
+
+export const deleteTodoById = (id) => async (dispatch) => {
+  await fetchWrapper.fetchDelete(`${URL}/todoList/${id}`);
+  dispatch({
+    type: actionsTypes.DELETE_BY_ID,
+    payload: id,
+  });
+};
+
+export const changeToDone = (todo) => async (dispatch) => {
+  todo.isDone = true;
+  const response = await fetchWrapper.put(`${URL}/todoList/${todo.id}`, todo);
+
+  dispatch({
+    type: actionsTypes.UPDATE_TODO_ITEM,
     payload: response,
   });
 };

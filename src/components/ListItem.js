@@ -1,24 +1,26 @@
 import React from "react";
+import { connect } from "react-redux";
+import { deleteTodoById, changeToDone } from "../actions";
 
-export default class ListItem extends React.Component {
-  render() {
-    return (
-      <li class="list-group-item">
-        <div className={this.props.todoItem.isDone ? "done" : "undone"}>
-          <span
-            onClick={() => this.props.changeToDone(this.props.todoItem.index)}
-            className="glyphicon glyphicon-ok icon"
-          ></span>{" "}
-          {this.props.todoItem.todoName}
-          <button
-            type="button"
-            className="close"
-            onClick={() => this.props.deleteTodoItem(this.props.todoItem)}
-          >
-            &times;
-          </button>
-        </div>
-      </li>
-    );
-  }
+function ListItem(props) {
+  return (
+    <li className="list-group-item">
+      <div className={props.todoItem.isDone ? "done" : "undone"}>
+        <span
+          onClick={() => props.changeToDone(props.todoItem)}
+          className="glyphicon glyphicon-ok icon"
+        ></span>{" "}
+        {props.todoItem.todoName}
+        <button
+          type="button"
+          className="close"
+          onClick={() => props.deleteTodoById(props.todoItem.id)}
+        >
+          &times;
+        </button>
+      </div>
+    </li>
+  );
 }
+
+export default connect(null, { deleteTodoById, changeToDone })(ListItem);
