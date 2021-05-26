@@ -1,26 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { addTodoToList } from "../actions";
 
-export default class TodoForm extends React.Component {
-  render() {
-    return (
-      <div className="form-inline">
-        <input
-          onChange={this.props.onChange}
-          type="text"
-          value={this.props.todoName}
-          name="todoName"
-          style={{ width: "300px" }}
-          className="form-control"
-          placeholder={"add new todo..."}
-        />
-        <button
-          type="submit"
-          className={"btn btn-default"}
-          onClick={this.props.addTodoToList}
-        >
-          ADD
-        </button>
-      </div>
-    );
-  }
+function TodoForm({ addTodoToList }) {
+  const [todoName, setTodoName] = useState("");
+
+  const addTodoToListAndRemoveValue = () => {
+    addTodoToList(todoName);
+    setTodoName("");
+  };
+  return (
+    <div className="form-inline">
+      <input
+        onChange={(event) => setTodoName(event.target.value)}
+        type="text"
+        value={todoName}
+        name="todoName"
+        style={{ width: "300px" }}
+        className="form-control"
+        placeholder={"add new todo..."}
+      />
+      <button
+        type="submit"
+        className={"btn btn-default"}
+        onClick={() => addTodoToListAndRemoveValue()}
+      >
+        ADD
+      </button>
+    </div>
+  );
 }
+
+export default connect(null, { addTodoToList })(TodoForm);

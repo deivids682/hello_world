@@ -13,22 +13,6 @@ class TodoApp extends React.Component {
   };
 
   componentDidMount() {
-    /*fetchWrapper.post("http://localhost:3000/todoList", {
-      name: "Davis Iljins",
-      todo: "Go to training",
-      isDone: true,
-    });*/
-
-    //fetchWrapper.get("http://localhost:3000/todoList");
-
-    /*fetchWrapper.put("http://localhost:3000/todoList/2", {
-      name: "Davis Iljins",
-      todo: "Go to training",
-      isDone: true,
-    });*/
-
-    // fetchWrapper.fetchDelete("http://localhost:3000/todoList/2");
-
     this.onChange = this.onChange.bind(this);
     this.addTodoToList = this.addTodoToList.bind(this);
     this.deleteTodoItem = this.deleteTodoItem.bind(this);
@@ -85,8 +69,8 @@ class TodoApp extends React.Component {
           changeToDone={this.changeToDone}
         />
         <TodoForm
-          onChange={this.onChange}
-          addTodoToList={this.addTodoToList}
+          //onChange={this.onChange}
+          // addTodoToList={this.addTodoToList}
           todoName={this.state.todoName}
         />
       </div>
